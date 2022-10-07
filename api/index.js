@@ -21,7 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: true, alter: true }).then(() => {
   // Aca hacer la llamada a la api para cargar la BD
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
