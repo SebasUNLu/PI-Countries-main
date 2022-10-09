@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true,
       },
-      nombre: {
+      name: {
         type: STRING,
         allowNull: false,
       },
-      dificultad: {
+      dificulty: {
         type: INTEGER,
         allowNull: false,
         validate: {
@@ -25,12 +25,12 @@ module.exports = (sequelize) => {
           max: 5,
         },
       },
-      duracion: {
+      duration: {
         // Duración en días
         type: INTEGER,
         allowNull: false,
       },
-      temporada: {
+      season: {
         type: ENUM("Verano", "Otoño", "Invierno", "Primavera"),
         allowNull: false,
       },
