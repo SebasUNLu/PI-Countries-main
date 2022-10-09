@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Activity } = require("../../db.js");
+const { TouristActivity } = require("../../db.js");
 const router = Router();
 
 router.post("/", async (req, res) => {
@@ -9,9 +9,15 @@ router.post("/", async (req, res) => {
     let { name, dificulty, duration, season, countries } = req.body;
     if (!name || !dificulty || !duration || !season)
       throw new Error("Faltan datos obligatorios");
-    if (typeof duration !== "number" || !Array.isArray(countries))
+    if (
+      typeof name !== "string" ||
+      typeof dificulty !== "number" ||
+      typeof duration !== "number" ||
+      typeof season !== "string" ||
+      !Array.isArray(countries)
+    )
       throw new Error("Formato de datos enviados invalido");
-    const newActivity = await Activity.create({
+    const newActivity = await TouristActivity.create({
       name,
       dificulty,
       duration,
