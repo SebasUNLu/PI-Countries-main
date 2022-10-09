@@ -3,6 +3,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const axios = require("axios");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
@@ -47,7 +48,41 @@ console.log(sequelize.models);
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+const loadCountries = async () => {
+  // Esta funcion es para cargar la BD con los paises al iniciar el servidor
+  const fetchedCountries = await axios
+    .get(`https://restcountries.com/v3/all`)
+    .then((response) => response.data);
+
+  await fetchedCountries.forEach((country) => {
+    let {
+      cca3,
+      translations,
+      flags,
+      continents,
+      capital,
+      area,
+      subregion,
+      population,
+    } = country;
+    if (!capital) capital = ["undefined"];
+    const newCountry = {
+      id: cca3,
+      name: translations.spa.common,
+      flag: flags[0],
+      continent: continents[0],
+      capital,
+      area,
+      subregion,
+      population,
+    };
+    Country.create(newCountry);
+  });
+  console.log('Carga completa');
+};
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  loadCountries,
 };
