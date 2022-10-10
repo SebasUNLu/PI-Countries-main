@@ -1,7 +1,13 @@
 import React from "react";
-export default Landing = () => {
-  return(
-    <>
-    </>
+import { NavLink } from "react-router-dom";
+
+export default function Landing() {
+  return (
+    <div>
+      <h1>Bienvenido a mi aplicación</h1>
+      <button>
+        <NavLink to="/home">Ir al Home</NavLink>
+      </button>
+    </div>
   );
-};
+}
