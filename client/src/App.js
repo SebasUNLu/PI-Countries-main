@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 
-import Header from "./components/header/header";
+import Header from "./components/header/header.js";
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 
