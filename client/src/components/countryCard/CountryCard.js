@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import style from './countryCard.module.css'
 import { NavLink } from "react-router-dom";
 
-export default function CountryCard({ name, continent, flag }) {
+export default function CountryCard({ id, name, continent, flag }) {
   return (
-    <div>
-      <img alt={`${name} flag`} src={flag} />
-      <h3>{name}</h3>
-      <p>{continent}</p>
+    <div className={style.cardCountry}>
+      <NavLink to={`/country/${id}`}>
+        <img alt={`${name} flag`} src={flag} />
+        <h3>{name}</h3>
+        <p>{continent}</p>
+      </NavLink>
     </div>
   );
 }

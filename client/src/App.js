@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./components/header/header.js";
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
+import CountryDetail from "./components/countryDetail/CountryDetail";
 
 function App() {
   return (
@@ -13,7 +14,13 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
-        {/* Ruta de detalle de pais */}
+        <Route
+          exact
+          path="/country/:countryId"
+          render={({ match }) => (
+            <CountryDetail countryId={match.params.countryId} />
+          )}
+        />
         {/* Ruta de creacion de actividad */}
       </Switch>
     </React.Fragment>

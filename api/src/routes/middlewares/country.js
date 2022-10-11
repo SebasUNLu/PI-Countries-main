@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const { Country } = require("../../db.js");
+const { Country, TouristActivity } = require("../../db.js");
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -28,7 +28,9 @@ router.get("/:countryId", async (req, res) => {
     const { countryId } = req.params;
     if (countryId.length !== 3)
       throw new Error("Formato de codigo de pais incorrecto");
-    const countrySearch = await Country.findByPk(countryId);
+    const countrySearch = await Country.findByPk(countryId, {
+      include: TouristActivity,
+    });
     if (!countrySearch) throw new Error("Pais no encontrado");
     res.status(200).send(countrySearch);
   } catch (error) {
