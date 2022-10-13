@@ -6,6 +6,7 @@ import Header from "./components/header/header.js";
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import CountryDetail from "./components/countryDetail/CountryDetail";
+import ActivityForm from "./components/activityForm/activityForm";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             <CountryDetail countryId={match.params.countryId} />
           )}
         />
-        {/* Ruta de creacion de actividad */}
+        <Route exact path="/createActivity" component={ActivityForm} />
       </Switch>
     </React.Fragment>
   );

@@ -7,6 +7,7 @@ export default function Header() {
     <div className={style.header}>
       <NavLink to="/">Landing</NavLink>
       <NavLink to="/home">Home</NavLink>
+      <NavLink to="/createActivity">Create Activity</NavLink>
     </div>
   );
 }
