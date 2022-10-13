@@ -1,8 +1,8 @@
 import React from "react";
-import style from './countryCard.module.css'
+import style from "./countryCard.module.css";
 import { NavLink } from "react-router-dom";
 
-export default function CountryCard({ id, name, continent, flag }) {
+function CountryCard({ id, name, continent, flag }) {
   return (
     <div className={style.cardCountry}>
       <NavLink to={`/country/${id}`}>
@@ -13,3 +13,5 @@ export default function CountryCard({ id, name, continent, flag }) {
     </div>
   );
 }
+
+export default CountryCard;
