@@ -2,7 +2,6 @@ import React from "react";
 
 const Pagination = ({ totalCountries, countryPerPage, setCurrentPage }) => {
   let pages = [];
-
   for (let i = 1; i <= Math.ceil(totalCountries / countryPerPage); i++) {
     pages.push(i);
   }
