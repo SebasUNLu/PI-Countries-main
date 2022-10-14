@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
       });
       if (countryList.length === 0) throw new Error("Pais no encontrado");
     } else {
-      countryList = await Country.findAll();
+      countryList = await Country.findAll({
+        include: TouristActivity,
+      });
     }
     res.status(200).send(countryList);
   } catch (error) {

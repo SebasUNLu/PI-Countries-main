@@ -2,6 +2,15 @@ const { Router } = require("express");
 const { TouristActivity } = require("../../db.js");
 const router = Router();
 
+router.get("/", async (req, res) => {
+  try {
+    let activityList = await TouristActivity.findAll();
+    res.status(200).send(activityList);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     // duration = integer (days)

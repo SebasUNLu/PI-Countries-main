@@ -10,16 +10,48 @@ function Home(props) {
   const dispatch = useDispatch();
   const countryList = useSelector((state) => state.countries);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [countryPerPage, setCountryPerPage] = useState(5);
+  const [filters, setFilters] = useState({
+    type: "activity",
+    content: "Actividad 1",
+  });
 
-  let lastIndex = currentPage * countryPerPage;
-  let firstIndex = lastIndex - countryPerPage;
-  let showCountryList = countryList.slice(firstIndex, lastIndex);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countryPerPage, setCountryPerPage] = useState(10);
 
   useEffect(() => {
     if (countryList.length === 0) dispatch(getAllCountries());
   }, [dispatch, countryList]);
+
+  const applyFilter = (lista) => {
+    let { type, content } = filters;
+    switch (type) {
+      case "continent":
+        return lista.filter((country) => country.continent === content);
+      case "activity":
+        return lista.filter((country) => {
+          let find = false;
+          country.touristActivities.forEach((activity) => {
+            if (activity.name === content) {
+              console.log("yes");
+              find = true;
+            }
+          });
+          return find;
+        });
+      default:
+        // No filter apply
+        return countryList;
+    }
+  };
+
+  let list = [...countryList];
+  // aplico filtros
+  list = applyFilter(list);
+  console.log(list);
+  // aplico ordenamiento
+  let lastIndex = currentPage * countryPerPage;
+  let firstIndex = lastIndex - countryPerPage;
+  let showCountryList = list.slice(firstIndex, lastIndex);
 
   return (
     <div>
@@ -29,7 +61,7 @@ function Home(props) {
       </div>
       <CountryList countryList={showCountryList} />
       <Pagination
-        totalCountries={countryList.length}
+        totalCountries={showCountryList.length}
         countryPerPage={countryPerPage}
         setCurrentPage={setCurrentPage}
       />
