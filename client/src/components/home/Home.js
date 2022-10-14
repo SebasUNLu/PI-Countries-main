@@ -5,16 +5,18 @@ import { getAllCountries } from "../../actions/index";
 
 import CountryList from "./CountryList";
 import FilterOptions from "./FilterOptions";
+import OrderingOptions from "./OrderingOptions";
 import Pagination from "./Pagination";
 
 function Home(props) {
   const dispatch = useDispatch();
   const countryList = useSelector((state) => state.countries);
 
-  const [filters, setFilters] = useState([]);
+  const [continentFilter, setContinentFilter] = useState("");
+  const [activityFilter, setActivityFilter] = useState("");
 
   const [ascendent, setAscendent] = useState(true);
-  const [orderByName, setOrderByName] = useState("name");
+  const [orderBy, setOrderBy] = useState("name");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [countryPerPage, setCountryPerPage] = useState(10);
@@ -25,22 +27,18 @@ function Home(props) {
 
   const applyFilter = () => {
     let retList = [...countryList];
-    for (const { type, content } of filters) {
-      switch (type) {
-        case "continent":
-          retList = retList.filter((country) => country.continent === content);
-          break;
-        case "activity":
-          retList = retList.filter(({ touristActivities }) => {
-            for (let i = 0; i < touristActivities.length; i++) {
-              if (touristActivities[i].name === content) return true;
-            }
-            return false;
-          });
-          break;
-        default:
-          break;
-      }
+    if (continentFilter) {
+      retList = retList.filter(
+        (country) => country.continent === continentFilter
+      );
+    }
+    if (activityFilter) {
+      retList = retList.filter(({ touristActivities }) => {
+        for (let i = 0; i < touristActivities.length; i++) {
+          if (touristActivities[i].name === activityFilter) return true;
+        }
+        return false;
+      });
     }
     return retList;
   };
@@ -48,11 +46,11 @@ function Home(props) {
   const applyOrdering = (list) => {
     let compare = ascendent
       ? (a, b) => {
-          if (a[orderByName] < b[orderByName]) return -1;
+          if (a[orderBy] < b[orderBy]) return -1;
           return 1;
         }
       : (a, b) => {
-          if (a[orderByName] < b[orderByName]) return 1;
+          if (a[orderBy] < b[orderBy]) return 1;
           return -1;
         };
     list.sort(compare);
@@ -73,7 +71,11 @@ function Home(props) {
         <input type="text" placeholder="Filtrar por nombre"></input>
         {/* imagen de lupa */}
       </div>
-      <FilterOptions setFilters={setFilters} />
+      <FilterOptions
+        setContinentFilter={setContinentFilter}
+        setActivityFilter={setActivityFilter}
+      />
+      <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} />
       <CountryList countryList={showCountryList} />
       <Pagination
         totalCountries={list.length}
