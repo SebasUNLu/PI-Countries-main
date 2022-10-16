@@ -7,6 +7,7 @@ import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import CountryDetail from "./components/countryDetail/CountryDetail";
 import ActivityForm from "./components/activityForm/activityForm";
+import BlackFadeCover from "./components/blackFadeCover.js/BlackFadeCover";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         />
         <Route exact path="/createActivity" component={ActivityForm} />
       </Switch>
+      <BlackFadeCover />
     </React.Fragment>
   );
 }

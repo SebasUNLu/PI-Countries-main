@@ -1,0 +1,33 @@
+.landing{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -5;
+}
+
+.title_landing{
+  color: white;
+  text-shadow: -1px 0 0.3em black, 0 1px 0.3em black, 1px 0 0.3em black, 0 -1px 0.3em black;
+  font-size: -webkit-xxx-large;
+  margin-bottom: 2em;
+}
+
+.button_lading{
+  /* background-image: linear-gradient(var(--button-primary), var(--button-primary), var(--button-secondary), var(--button-primary), var(--button-primary)); */
+  background-color: rgb(41, 41, 41);
+  color: white;
+  border-radius: 0.5em;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 1em 2em;
+}
+
+.button_lading:hover{
+  background-color: rgb(80, 80, 80);
+}

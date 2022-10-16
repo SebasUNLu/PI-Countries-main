@@ -5,9 +5,15 @@ import style from "./header.module.css";
 export default function Header() {
   return (
     <div className={style.header}>
-      <NavLink to="/">Landing</NavLink>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/createActivity">Create Activity</NavLink>
+      <NavLink exact to="/" activeClassName={style.header_active}>
+        Landing
+      </NavLink>
+      <NavLink exact to="/home" activeClassName={style.header_active}>
+        Home
+      </NavLink>
+      <NavLink exact to="/createActivity" activeClassName={style.header_active}>
+        Create Activity
+      </NavLink>
     </div>
   );
 }
