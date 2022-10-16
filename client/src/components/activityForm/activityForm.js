@@ -1,7 +1,13 @@
 import axios from "axios";
+import style from "./ActivityForm.module.css";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountries } from "../../actions";
 
 export default function ActivityForm({ countryId }) {
+  const dispatch = useDispatch();
+  const { countryList } = useSelector((state) => state);
+
   const [input, setInput] = useState({
     name: "",
     dificulty: "",
@@ -11,6 +17,11 @@ export default function ActivityForm({ countryId }) {
   });
   const [errors, setErrors] = useState({});
   const [disable, setDisable] = useState(true);
+  const [openC, setOpenC] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, []);
 
   useEffect(() => {
     checkReady();
@@ -63,32 +74,34 @@ export default function ActivityForm({ countryId }) {
   };
 
   return (
-    <div>
+    <div className={style.activity_form}>
       <h1>Creación de Actividad</h1>
       <form onSubmit={submitHandler}>
-        <label htmlFor="name">Nombre de la actividad:</label>
-        <input
-          className={errors.name && "danger"}
-          type="text"
-          name="name"
-          key="name"
-          value={input.name}
-          onChange={handleInputChange}
-        />
-        <br />
-        <label htmlFor="duration">Duración:</label>
-        <input
-          className={errors.duration && "danger"}
-          type="number"
-          name="duration"
-          key="duration"
-          value={input.duration}
-          onChange={handleInputChange}
-        />
-        <br />
+        <div>
+          <label htmlFor="name">Nombre de la actividad:</label>
+          <input
+            className={errors.name && "danger"}
+            type="text"
+            name="name"
+            key="name"
+            value={input.name}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="duration">Duración:</label>
+          <input
+            className={errors.duration && "danger"}
+            type="number"
+            name="duration"
+            key="duration"
+            value={input.duration}
+            onChange={handleInputChange}
+          />
+        </div>
         <div>
           <label>Dificultad:</label>
-          <div onChange={handleInputChange}>
+          <div className={style.activity_radio} onChange={handleInputChange}>
             {[1, 2, 3, 4, 5].map((num) => (
               <label key={`radio_${num}`}>
                 <input type={"radio"} name="dificulty" value={num} />
@@ -97,15 +110,20 @@ export default function ActivityForm({ countryId }) {
             ))}
           </div>
         </div>
-        <label htmlFor="season">Temporada:</label>
-        <select name="season" onChange={handleInputChange} value={input.season}>
-          <option value={"Otoño"}>Otoño</option>
-          <option value={"Invierno"}>Invierno</option>
-          <option value={"Primavera"}>Primavera</option>
-          <option value={"Verano"}>Verano</option>
-        </select>
-        <br />
-        <button type="submit" disabled={disable}>
+        <div>
+          <label htmlFor="season">Temporada:</label>
+          <select
+            name="season"
+            onChange={handleInputChange}
+            value={input.season}
+          >
+            <option value={"Otoño"}>Otoño</option>
+            <option value={"Invierno"}>Invierno</option>
+            <option value={"Primavera"}>Primavera</option>
+            <option value={"Verano"}>Verano</option>
+          </select>
+        </div>
+        <button className={style.submit_btn} type="submit" disabled={disable}>
           Crear Actividad
         </button>
       </form>

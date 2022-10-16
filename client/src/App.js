@@ -6,7 +6,7 @@ import Header from "./components/header/header.js";
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import CountryDetail from "./components/countryDetail/CountryDetail";
-import ActivityForm from "./components/activityForm/activityForm";
+import ActivityForm from "./components/activityForm/ActivityForm";
 import BlackFadeCover from "./components/blackFadeCover.js/BlackFadeCover";
 
 function App() {

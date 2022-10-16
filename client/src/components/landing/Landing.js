@@ -6,7 +6,7 @@ export default function Landing() {
   return (
     <div className={style.landing}>
       <h1 className={style.title_landing}>Bienvenido a mi aplicación</h1>
-      <NavLink className={style.button_lading} to="/home">Ir al Home</NavLink>
+      <NavLink className={style.button_landing} to="/home">Ir al Home</NavLink>
     </div>
   );
 }

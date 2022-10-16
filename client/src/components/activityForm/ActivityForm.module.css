@@ -1,0 +1,54 @@
+.activity_form{
+  background-color: #00000054;
+  width: 60vw;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding-bottom: 2em;
+  border-radius: 2em;
+  font-weight: bold;
+}
+
+.activity_form > form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.activity_form > form > div{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0.4em 0em;
+}
+
+.activity_form > form input{
+  border-radius: 0.5em;
+  border: 1px solid black;
+}
+
+.submit_btn{
+  background-color: rgb(17, 56, 11);
+  color: white;
+  border-radius: 0.5em;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 1em 2em;
+}
+
+.submit_btn:hover:enabled{
+  background-color: rgb(33, 104, 22);
+}
+
+.submit_btn:disabled{
+  background-color: gray;
+}
+
+.activity_radio label{
+  margin-right: 0.2em;
+}

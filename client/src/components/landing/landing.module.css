@@ -18,7 +18,7 @@
   margin-bottom: 2em;
 }
 
-.button_lading{
+.button_landing{
   /* background-image: linear-gradient(var(--button-primary), var(--button-primary), var(--button-secondary), var(--button-primary), var(--button-primary)); */
   background-color: rgb(41, 41, 41);
   color: white;
@@ -28,6 +28,6 @@
   padding: 1em 2em;
 }
 
-.button_lading:hover{
+.button_landing:hover{
   background-color: rgb(80, 80, 80);
 }
