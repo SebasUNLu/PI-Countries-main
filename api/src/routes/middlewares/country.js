@@ -10,10 +10,9 @@ router.get("/", async (req, res) => {
     if (name) {
       countryList = await Country.findAll({
         where: {
-          name: { [Op.like]: `%${name}%` },
+          name: { [Op.iLike]: `%${name}%` },
         },
       });
-      if (countryList.length === 0) throw new Error("Pais no encontrado");
     } else {
       countryList = await Country.findAll({
         include: TouristActivity,

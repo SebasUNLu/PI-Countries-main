@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 // import style from "./home.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries } from "../../actions/index";
+import { getCountries } from "../../actions/index";
 
 import CountryList from "./CountryList";
 import FilterOptions from "./FilterOptions";
 import OrderingOptions from "./OrderingOptions";
 import Pagination from "./Pagination";
+import SearchName from "./SearchName";
 
 function Home(props) {
   const dispatch = useDispatch();
-  const countryList = useSelector((state) => state.countries);
+  const { countryList } = useSelector((state) => state);
 
   const [continentFilter, setContinentFilter] = useState("");
   const [activityFilter, setActivityFilter] = useState("");
@@ -22,8 +23,8 @@ function Home(props) {
   const [countryPerPage, setCountryPerPage] = useState(10);
 
   useEffect(() => {
-    if (countryList.length === 0) dispatch(getAllCountries());
-  }, [dispatch, countryList]);
+    dispatch(getCountries());
+  }, []);
 
   const applyFilter = () => {
     let retList = [...countryList];
@@ -67,10 +68,7 @@ function Home(props) {
 
   return (
     <div>
-      <div>
-        <input type="text" placeholder="Filtrar por nombre"></input>
-        {/* imagen de lupa */}
-      </div>
+      <SearchName />
       <FilterOptions
         setContinentFilter={setContinentFilter}
         setActivityFilter={setActivityFilter}
