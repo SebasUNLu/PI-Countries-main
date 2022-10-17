@@ -1,6 +1,7 @@
 import axios from "axios";
 import style from "./ActivityForm.module.css";
 import React, { useEffect, useState } from "react";
+import CountrySelector from "./CountrySelector";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../actions";
 
@@ -13,8 +14,9 @@ export default function ActivityForm({ countryId }) {
     dificulty: "",
     duration: "",
     season: "Otoño",
-    countries: [],
+    // countries: [],
   });
+  const [countriesSelected, setCountriesSelected] = useState([]);
   const [errors, setErrors] = useState({});
   const [disable, setDisable] = useState(true);
   const [openC, setOpenC] = useState(false);
@@ -62,7 +64,6 @@ export default function ActivityForm({ countryId }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("input ", input);
     axios
       .post("http://localhost:3001/activities", {
         ...input,
@@ -71,6 +72,13 @@ export default function ActivityForm({ countryId }) {
       })
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
+  };
+
+  const addCountryHandler = (country) => {
+    for (let i = 0; i < countriesSelected.length; i++) {
+      if (countriesSelected[i].id === country.id) return;
+    }
+    setCountriesSelected((prev) => [...prev, country]);
   };
 
   return (
@@ -123,6 +131,12 @@ export default function ActivityForm({ countryId }) {
             <option value={"Verano"}>Verano</option>
           </select>
         </div>
+        <button type="button" onClick={() => setOpenC(!openC)}>Añadir paises</button>
+        <CountrySelector
+          countryList={countryList}
+          openList={openC}
+          addCountry={addCountryHandler}
+        />
         <button className={style.submit_btn} type="submit" disabled={disable}>
           Crear Actividad
         </button>

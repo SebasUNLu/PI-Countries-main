@@ -1,0 +1,27 @@
+.countryListForm{
+  background-color: red;
+  transition: height 0.5s;
+  height: 0px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.open{
+  height: 200px;
+}
+
+.countryMiniCard{
+  background-color: blue;
+  width: 50px;
+  height: 50px;
+  list-style: none;
+  flex: 0 0 22%;
+  margin: 0.3em;
+  cursor: pointer;
+}
+
+.selected{
+  border: 1px solid green;
+}
