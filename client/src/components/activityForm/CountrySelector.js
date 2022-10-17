@@ -23,7 +23,9 @@ const countrySelector = ({ countryList, openList, addCountry }) => {
               checkSelected(id) ? `${style.selected}` : ``
             }`}
             onClick={() => addCountry({ id, name, flag })}
-          ></div>
+          >
+            <img src={flag} />
+          </div>
         ))}
     </div>
   );

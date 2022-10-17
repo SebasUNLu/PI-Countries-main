@@ -1,0 +1,18 @@
+.selectedList{
+  background-color: red;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.selectedC{
+  width: 80px;
+  height: 50px;
+  margin: 0.2em;
+}
+
+.selectedC img{
+  width: 100%;
+  height: 100%;
+}

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import CountrySelector from "./CountrySelector";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../actions";
+import SelectedCountries from "./SelectedCountries";
 
 export default function ActivityForm({ countryId }) {
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ export default function ActivityForm({ countryId }) {
     dificulty: "",
     duration: "",
     season: "Otoño",
-    // countries: [],
   });
   const [countriesSelected, setCountriesSelected] = useState([]);
   const [errors, setErrors] = useState({});
@@ -69,6 +69,7 @@ export default function ActivityForm({ countryId }) {
         ...input,
         dificulty: parseInt(input.dificulty),
         duration: parseInt(input.duration),
+        countries: countriesSelected.map((c) => c.id),
       })
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
@@ -79,6 +80,11 @@ export default function ActivityForm({ countryId }) {
       if (countriesSelected[i].id === country.id) return;
     }
     setCountriesSelected((prev) => [...prev, country]);
+  };
+
+  const removeCountryHandler = (id) => {
+    let ret = countriesSelected.filter((c) => c.id !== id);
+    setCountriesSelected(ret);
   };
 
   return (
@@ -131,11 +137,17 @@ export default function ActivityForm({ countryId }) {
             <option value={"Verano"}>Verano</option>
           </select>
         </div>
-        <button type="button" onClick={() => setOpenC(!openC)}>Añadir paises</button>
+        <button type="button" onClick={() => setOpenC(!openC)}>
+          Añadir paises
+        </button>
         <CountrySelector
           countryList={countryList}
           openList={openC}
           addCountry={addCountryHandler}
+        />
+        <SelectedCountries
+          countryList={countriesSelected}
+          removeCountryHandler={removeCountryHandler}
         />
         <button className={style.submit_btn} type="submit" disabled={disable}>
           Crear Actividad
