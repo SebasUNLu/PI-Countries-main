@@ -8,7 +8,7 @@ import SelectedCountries from "./SelectedCountries";
 
 export default function ActivityForm({ countryId }) {
   const dispatch = useDispatch();
-  const { countryList } = useSelector((state) => state);
+  const { countryList, loadingCountries } = useSelector((state) => state);
 
   const [input, setInput] = useState({
     name: "",
@@ -92,75 +92,91 @@ export default function ActivityForm({ countryId }) {
       if (countriesSelected[i].id === id) return true;
     }
     return false;
-  }
+  };
 
   return (
-    <div className={style.activity_form}>
-      <h1>Creación de Actividad</h1>
-      <form onSubmit={submitHandler}>
-        <div className={style.formSection}>
-          <label htmlFor="name">Nombre de la actividad:</label>
-          <input
-            className={errors.name && "danger"}
-            type="text"
-            name="name"
-            key="name"
-            value={input.name}
-            onChange={handleInputChange}
-          />
+    <>
+      {loadingCountries && <div>Cargando formulario ...</div>}
+      {!loadingCountries && (
+        <div className={style.activity_form}>
+          <h1>Creación de Actividad</h1>
+          <form onSubmit={submitHandler}>
+            <div className={style.formSection}>
+              <label htmlFor="name">Nombre de la actividad:</label>
+              <input
+                className={errors.name && "danger"}
+                type="text"
+                name="name"
+                key="name"
+                value={input.name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={style.formSection}>
+              <label htmlFor="duration">Duración:</label>
+              <input
+                className={errors.duration && "danger"}
+                type="number"
+                name="duration"
+                key="duration"
+                value={input.duration}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={style.formSection}>
+              <label>Dificultad:</label>
+              <div
+                className={style.activity_radio}
+                onChange={handleInputChange}
+              >
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <label key={`radio_${num}`}>
+                    <input type={"radio"} name="dificulty" value={num} />
+                    {num}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className={style.formSection}>
+              <label htmlFor="season">Temporada:</label>
+              <select
+                name="season"
+                onChange={handleInputChange}
+                value={input.season}
+              >
+                <option value={"Otoño"}>Otoño</option>
+                <option value={"Invierno"}>Invierno</option>
+                <option value={"Primavera"}>Primavera</option>
+                <option value={"Verano"}>Verano</option>
+              </select>
+            </div>
+            <button
+              className={style.openCbtn}
+              type="button"
+              onClick={() => setOpenC(!openC)}
+            >
+              Añadir paises
+            </button>
+            <CountrySelector
+              countryList={countryList}
+              openList={openC}
+              addCountry={addCountryHandler}
+              findCountry={findCountry}
+            />
+            <SelectedCountries
+              countryList={countriesSelected}
+              removeCountryHandler={removeCountryHandler}
+            />
+            <button
+              className={style.submit_btn}
+              type="submit"
+              disabled={disable}
+            >
+              Crear Actividad
+            </button>
+          </form>
         </div>
-        <div className={style.formSection}>
-          <label htmlFor="duration">Duración:</label>
-          <input
-            className={errors.duration && "danger"}
-            type="number"
-            name="duration"
-            key="duration"
-            value={input.duration}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={style.formSection}>
-          <label>Dificultad:</label>
-          <div className={style.activity_radio} onChange={handleInputChange}>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <label key={`radio_${num}`}>
-                <input type={"radio"} name="dificulty" value={num} />
-                {num}
-              </label>
-            ))}
-          </div>
-        </div>
-        <div className={style.formSection}>
-          <label htmlFor="season">Temporada:</label>
-          <select
-            name="season"
-            onChange={handleInputChange}
-            value={input.season}
-          >
-            <option value={"Otoño"}>Otoño</option>
-            <option value={"Invierno"}>Invierno</option>
-            <option value={"Primavera"}>Primavera</option>
-            <option value={"Verano"}>Verano</option>
-          </select>
-        </div>
-        <button className={style.openCbtn} type="button" onClick={() => setOpenC(!openC)}>
-          Añadir paises
-        </button>
-        <CountrySelector
-          countryList={countryList}
-          openList={openC}
-          addCountry={addCountryHandler}
-          findCountry={findCountry}
-        />
-        <SelectedCountries
-          countryList={countriesSelected}
-          removeCountryHandler={removeCountryHandler}
-        />
-        <button className={style.submit_btn} type="submit" disabled={disable}>
-          Crear Actividad
-        </button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
