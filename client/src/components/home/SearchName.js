@@ -1,4 +1,5 @@
 import React from "react";
+import style from './SearchName.module.css'
 import { useDispatch } from "react-redux";
 import { getCountries } from "../../actions";
 
@@ -10,7 +11,7 @@ const SearchName = (props) => {
   };
 
   return (
-    <div>
+    <div className={style.searchName}>
       <input
         type="text"
         placeholder="Filtrar por nombre"

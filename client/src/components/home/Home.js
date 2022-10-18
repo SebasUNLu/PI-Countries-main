@@ -69,11 +69,16 @@ function Home(props) {
   return (
     <div>
       <SearchName />
-      <FilterOptions
+      {/* 
+        <LateralList />
+      */}
+      
+      {/* <FilterOptions
         setContinentFilter={setContinentFilter}
         setActivityFilter={setActivityFilter}
       />
-      <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} />
+      <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} /> */}
+      
       <CountryList countryList={showCountryList} />
       <Pagination
         totalCountries={list.length}

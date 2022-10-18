@@ -13,7 +13,7 @@
 }
 
 .cardCountry:hover{
-  background-color: rgba(69, 69, 69, 0.5);
+  background-color: rgba(69, 69, 69, 1);
 }
 
 .cardCountry img{
