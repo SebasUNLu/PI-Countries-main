@@ -6,8 +6,13 @@ const SelectedCountries = ({ countryList, removeCountryHandler }) => {
     <div className={style.selectedList}>
       {countryList.length > 0 &&
         countryList.map(({ id, flag }) => (
-          <div key={id} onClick={() => removeCountryHandler(id)} className={style.selectedC}>
+          <div
+            key={id}
+            onClick={() => removeCountryHandler(id)}
+            className={style.selectedC}
+          >
             <img src={flag} />
+            <button>X</button>
           </div>
         ))}
     </div>

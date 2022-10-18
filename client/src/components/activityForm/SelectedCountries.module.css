@@ -1,5 +1,4 @@
 .selectedList{
-  background-color: red;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -10,9 +9,25 @@
   width: 80px;
   height: 50px;
   margin: 0.2em;
+  position: relative;
+  cursor: pointer;
 }
 
 .selectedC img{
   width: 100%;
   height: 100%;
+}
+
+.selectedC button{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.selectedC button:hover{
+  background-color: pink;
 }

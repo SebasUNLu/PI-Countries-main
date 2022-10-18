@@ -87,11 +87,18 @@ export default function ActivityForm({ countryId }) {
     setCountriesSelected(ret);
   };
 
+  const findCountry = (id) => {
+    for (let i = 0; i < countriesSelected.length; i++) {
+      if (countriesSelected[i].id === id) return true;
+    }
+    return false;
+  }
+
   return (
     <div className={style.activity_form}>
       <h1>Creación de Actividad</h1>
       <form onSubmit={submitHandler}>
-        <div>
+        <div className={style.formSection}>
           <label htmlFor="name">Nombre de la actividad:</label>
           <input
             className={errors.name && "danger"}
@@ -102,7 +109,7 @@ export default function ActivityForm({ countryId }) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className={style.formSection}>
           <label htmlFor="duration">Duración:</label>
           <input
             className={errors.duration && "danger"}
@@ -113,7 +120,7 @@ export default function ActivityForm({ countryId }) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className={style.formSection}>
           <label>Dificultad:</label>
           <div className={style.activity_radio} onChange={handleInputChange}>
             {[1, 2, 3, 4, 5].map((num) => (
@@ -124,7 +131,7 @@ export default function ActivityForm({ countryId }) {
             ))}
           </div>
         </div>
-        <div>
+        <div className={style.formSection}>
           <label htmlFor="season">Temporada:</label>
           <select
             name="season"
@@ -137,13 +144,14 @@ export default function ActivityForm({ countryId }) {
             <option value={"Verano"}>Verano</option>
           </select>
         </div>
-        <button type="button" onClick={() => setOpenC(!openC)}>
+        <button className={style.openCbtn} type="button" onClick={() => setOpenC(!openC)}>
           Añadir paises
         </button>
         <CountrySelector
           countryList={countryList}
           openList={openC}
           addCountry={addCountryHandler}
+          findCountry={findCountry}
         />
         <SelectedCountries
           countryList={countriesSelected}

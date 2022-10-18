@@ -1,13 +1,7 @@
 import React from "react";
 import style from "./CountrySelector.module.css";
 
-const countrySelector = ({ countryList, openList, addCountry }) => {
-  const checkSelected = (id) => {
-    for (let i = 0; i < countryList.length; i++) {
-      if (countryList[i].id === id) return true;
-    }
-    return false;
-  };
+const countrySelector = ({ countryList, openList, addCountry, findCountry }) => {
 
   return (
     <div
@@ -19,9 +13,7 @@ const countrySelector = ({ countryList, openList, addCountry }) => {
         countryList.map(({ id, name, flag }) => (
           <div
             key={id}
-            className={`${style.countryMiniCard} ${
-              checkSelected(id) ? `${style.selected}` : ``
-            }`}
+            className={`${style.countryMiniCard} ${findCountry(id) ? `${style.selected}` : ``}`}
             onClick={() => addCountry({ id, name, flag })}
           >
             <img src={flag} />
