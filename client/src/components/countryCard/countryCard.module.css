@@ -1,5 +1,5 @@
 .cardCountry{
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   height: 200px;
   width: 200px;
@@ -13,7 +13,7 @@
 }
 
 .cardCountry:hover{
-  background-color: rgba(69, 69, 69, 1);
+  background-color: rgb(87, 87, 87);
 }
 
 .cardCountry img{

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import style from "./home.module.css";
+import style from "./home.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../actions/index";
 
@@ -12,6 +12,7 @@ import SearchName from "./SearchName";
 function Home(props) {
   const dispatch = useDispatch();
   const { countryList } = useSelector((state) => state);
+  const [openSide, setOpenSide] = useState(false);
 
   const [continentFilter, setContinentFilter] = useState("");
   const [activityFilter, setActivityFilter] = useState("");
@@ -67,24 +68,39 @@ function Home(props) {
   let showCountryList = list.slice(firstIndex, lastIndex);
 
   return (
-    <div>
-      <SearchName />
-      {/* 
+    <div className={style.home_container}>
+      <div
+        className={`${style.sideOptions} ${
+          openSide ? `${style.sideOptions_open}` : ``
+        }`}
+      >
+        <button
+          className={`${style.sideOptionsButton} ${
+            openSide ? `${style.sideOptionsButton_fade}` : ``
+          }`}
+          onClick={() => setOpenSide(true)}
+        >
+          {"<"}
+        </button>
+      </div>
+      <div className={style.home_countryList}>
+        <SearchName />
+        {/* 
         <LateralList />
       */}
-      
-      {/* <FilterOptions
+
+        {/* <FilterOptions
         setContinentFilter={setContinentFilter}
         setActivityFilter={setActivityFilter}
       />
       <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} /> */}
-      
-      <CountryList countryList={showCountryList} />
-      <Pagination
-        totalCountries={list.length}
-        countryPerPage={countryPerPage}
-        setCurrentPage={setCurrentPage}
-      />
+        <CountryList countryList={showCountryList} />
+        <Pagination
+          totalCountries={list.length}
+          countryPerPage={countryPerPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 }
