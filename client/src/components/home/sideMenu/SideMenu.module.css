@@ -1,0 +1,81 @@
+/* Side Menu */
+/* 
+
+*/
+.menu{
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 20vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  z-index: 10;
+  transition: display 1s, opacity 1s;
+  padding-top: 4em;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.menu_open{
+  visibility: inherit;
+  opacity: 1;
+}
+
+.menu_close{
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu_btnClose_div{
+  width: 100%;
+  text-align: end;
+}
+
+.menu_btnClose_div > button{
+  margin-right: 5%;
+  width: 5em;
+}
+
+
+/* Boton float */
+
+.menu_btn_float{
+  position: fixed;
+  top: 10vh;
+  left: 1em;
+  transition: opacity 0.2s, visibility 0s;
+  background-color: rgb(0,0,0,0.8);
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.menu_btn_float_menu_open{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu_btn_float_menu_close{
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Botones dentro del menu */
+
+.menu_closeBtn{
+  border: 0px;
+  background-color: transparent;
+}
+
+.menu button{
+  color: white;
+  font-weight: bold;
+  border-radius: 0.5em;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.menu button:hover{
+  background-color: rgba(89, 89, 89);
+}

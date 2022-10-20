@@ -1,11 +1,14 @@
 .header{
   background-color: gray;
+  width: 100%;
   padding: 1em 0.5em 1em 0.5em;
   border-radius: 0em 0em 1em 1em;
   display: flex;
   justify-content: space-evenly;
   background-image: linear-gradient( black, black, rgb(46, 46, 46), black, black);
-  z-index: 10;
+  position: fixed;
+  z-index: 30;
+  top: 0em;
 }
 
 .header > h1{

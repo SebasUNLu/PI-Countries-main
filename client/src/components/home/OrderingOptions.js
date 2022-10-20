@@ -1,8 +1,9 @@
 import React from "react";
+import style from "./OrderingOptions.module.css";
 
 const OrderingOptions = ({ setAscendent, setOrderBy }) => {
   return (
-    <div>
+    <div className={style.ordering_container}>
       <p>Ordenar por:</p>
       <div>
         <button onClick={() => setOrderBy("name")}>Nombre</button>

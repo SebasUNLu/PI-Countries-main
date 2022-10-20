@@ -4,15 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../actions/index";
 
 import CountryList from "./CountryList";
-import FilterOptions from "./FilterOptions";
-import OrderingOptions from "./OrderingOptions";
 import Pagination from "./Pagination";
 import SearchName from "./SearchName";
+import SideMenu from "./sideMenu/SideMenu";
 
 function Home(props) {
   const dispatch = useDispatch();
   const { countryList } = useSelector((state) => state);
-  const [openSide, setOpenSide] = useState(false);
 
   const [continentFilter, setContinentFilter] = useState("");
   const [activityFilter, setActivityFilter] = useState("");
@@ -69,31 +67,39 @@ function Home(props) {
 
   return (
     <div className={style.home_container}>
+      {/* <button
+        className={`${style.sideOptionsButton} ${
+          openSide ? `${style.sideOptionsButton_fade}` : ``
+        }`}
+        onClick={() => setOpenSide(true)}
+      >
+        {"<"}
+      </button>
       <div
         className={`${style.sideOptions} ${
           openSide ? `${style.sideOptions_open}` : ``
         }`}
       >
-        <button
-          className={`${style.sideOptionsButton} ${
-            openSide ? `${style.sideOptionsButton_fade}` : ``
-          }`}
-          onClick={() => setOpenSide(true)}
-        >
-          {"<"}
-        </button>
-      </div>
+        <button onClick={() => setOpenSide(false)}>{'<--'}</button>
+        <FilterOptions
+          setContinentFilter={setContinentFilter}
+          setActivityFilter={setActivityFilter}
+        />
+        <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} />
+      </div> */}
+      <SideMenu
+        setContinentFilter={setContinentFilter}
+        setActivityFilter={setActivityFilter}
+        setAscendent={setAscendent}
+        setOrderBy={setOrderBy}
+      />
+
       <div className={style.home_countryList}>
         <SearchName />
         {/* 
         <LateralList />
       */}
 
-        {/* <FilterOptions
-        setContinentFilter={setContinentFilter}
-        setActivityFilter={setActivityFilter}
-      />
-      <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} /> */}
         <CountryList countryList={showCountryList} />
         <Pagination
           totalCountries={list.length}

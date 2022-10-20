@@ -1,4 +1,5 @@
 import axios from "axios";
+import style from './FilterOptions.module.css'
 import React, { useEffect, useState } from "react";
 
 let continentsList = [
