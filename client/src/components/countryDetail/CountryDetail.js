@@ -42,24 +42,53 @@ export default function CountryDetail({ countryId }) {
       {load && (
         <div className={style.detailContainer}>
           <h1>{name}</h1>
-          <h1>Código de País: {countryId}</h1>
-          <img alt={`${name} flag`} src={flag} />
-          <p>Continente: {continent}</p>
-          <p>Capital: {capital}</p>
-          <p>Subregion: {subregion}</p>
-          <p>Area: {area}</p>
-          <p>Poblacion: {population} personas</p>
-          <div>
-            <h3>Actividades disponibles</h3>
-            {touristActivities.length > 0 &&
-              touristActivities.map(({ name, dificulty, duration, season }, index) => (
-                <ul key={index}>
-                  <li>Nombre: {name}</li>
-                  <li>Dificultad: {dificulty}</li>
-                  <li>Duración: {duration} días</li>
-                  <li>Temporada: {season}</li>
-                </ul>
-              ))}
+          <div className={style.flag_Cap_container}>
+            <img alt={`${name} flag`} src={flag} />
+            <div>
+              <p>Capital:</p>
+              <p>{capital}</p>
+            </div>
+          </div>
+          <div className={style.detail_div}>
+            <p>Código ISO: {countryId}</p>
+          </div>
+          <div className={style.detail_div}>
+            <p>Continente: {continent}</p>
+          </div>
+          <div className={style.detail_div}>
+            <p>Poblacion: {population} personas</p>
+          </div>
+          <div className={style.detail_div}>
+            <p>Subregion: {subregion}</p>
+          </div>
+          <div className={style.detail_div}>
+            <p>Area: {area}</p>
+          </div>
+          <div className={style.activities_Container}>
+            <h2>Actividades Turisticas</h2>
+            {
+              touristActivities.length === 0
+              ? <h3>No hay actividades turisticas en este país</h3>
+              : touristActivities.map(({name, dificulty, duration, season}) => 
+                  <div className={style.activity_card}>
+                    <h3>{name}</h3>
+                    <div className={style.activity_details}>
+                      <div className={style.activity_detail_info}>
+                        <h4>Dificultad</h4>
+                        <p>{dificulty}</p>
+                      </div>
+                      <div className={style.activity_detail_info}>
+                        <h4>Duración</h4>
+                        <p>{duration}</p>
+                      </div>
+                      <div className={style.activity_detail_info}>
+                        <h4>Temporada</h4>
+                        <p>{season}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+            }
           </div>
         </div>
       )}
