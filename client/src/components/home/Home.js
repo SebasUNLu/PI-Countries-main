@@ -67,43 +67,19 @@ function Home(props) {
 
   return (
     <div className={style.home_container}>
-      {/* <button
-        className={`${style.sideOptionsButton} ${
-          openSide ? `${style.sideOptionsButton_fade}` : ``
-        }`}
-        onClick={() => setOpenSide(true)}
-      >
-        {"<"}
-      </button>
-      <div
-        className={`${style.sideOptions} ${
-          openSide ? `${style.sideOptions_open}` : ``
-        }`}
-      >
-        <button onClick={() => setOpenSide(false)}>{'<--'}</button>
-        <FilterOptions
-          setContinentFilter={setContinentFilter}
-          setActivityFilter={setActivityFilter}
-        />
-        <OrderingOptions setAscendent={setAscendent} setOrderBy={setOrderBy} />
-      </div> */}
       <SideMenu
         setContinentFilter={setContinentFilter}
         setActivityFilter={setActivityFilter}
         setAscendent={setAscendent}
         setOrderBy={setOrderBy}
       />
-
       <div className={style.home_countryList}>
         <SearchName />
-        {/* 
-        <LateralList />
-      */}
-
         <CountryList countryList={showCountryList} />
         <Pagination
           totalCountries={list.length}
           countryPerPage={countryPerPage}
+          currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
       </div>

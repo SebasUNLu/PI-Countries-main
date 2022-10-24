@@ -20,6 +20,10 @@ export default function ActivityForm({ countryId }) {
   const [errors, setErrors] = useState({});
   const [disable, setDisable] = useState(true);
   const [openC, setOpenC] = useState(false);
+  const [resultForm, setResultForm] = useState({
+    message: "",
+    resultClass: "",
+  });
 
   useEffect(() => {
     dispatch(getCountries());
@@ -52,18 +56,30 @@ export default function ActivityForm({ countryId }) {
   const validate = ({ name, dificulty, duration, season }) => {
     let errors = {};
     if (!name) errors.name = "El nombre es requerido!";
-    else if (!/[\w]+[^\s]$/i) errors.name = "Nombre invalido";
+    else if (!/[\w]+[^\s]$/i) errors.name = "Nombre invalido!";
     if (!dificulty)
       errors.dificulty = "La dificulad es requerida es requerido!";
-    if (!duration) errors.duration = "La duración es requerido!";
+    if (!duration) errors.duration = "La duracion es requerida!";
     else if (duration < 1 || duration > 10)
-      errors.duration = "La duración debe ser entre 1 y 10 días";
+      errors.duration = "La duración debe ser entre 1 y 10 días!";
     if (!season) errors.name = "La temporada es requerido!";
+
     return errors;
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setResultForm({
+      message: "",
+      resultClass: "",
+    });
+    if (!countriesSelected.length) {
+      setResultForm({
+        message: "Debe seleccionar almenos 1 país!",
+        resultClass: `${style.result} ${style.result_Fail}`,
+      });
+      return;
+    }
     axios
       .post("http://localhost:3001/activities", {
         ...input,
@@ -71,8 +87,18 @@ export default function ActivityForm({ countryId }) {
         duration: parseInt(input.duration),
         countries: countriesSelected.map((c) => c.id),
       })
-      .then((r) => console.log(r))
-      .catch((e) => console.log(e));
+      .then((r) => {
+        setResultForm({
+          message: "Actividad creada exitosamente!",
+          resultClass: `${style.result} ${style.result_Success}`,
+        });
+      })
+      .catch((e) => {
+        setResultForm({
+          message: e.message,
+          resultClass: `${style.result} ${style.result_Fail}`,
+        });
+      });
   };
 
   const addCountryHandler = (country) => {
@@ -112,6 +138,7 @@ export default function ActivityForm({ countryId }) {
                 onChange={handleInputChange}
               />
             </div>
+            {errors.name && <p className={style.error_input}>{errors.name}</p>}
             <div className={style.formSection}>
               <label htmlFor="duration">Duración:</label>
               <input
@@ -123,6 +150,9 @@ export default function ActivityForm({ countryId }) {
                 onChange={handleInputChange}
               />
             </div>
+            {errors.duration && (
+              <p className={style.error_input}>{errors.duration}</p>
+            )}
             <div className={style.formSection}>
               <label>Dificultad:</label>
               <div
@@ -137,6 +167,9 @@ export default function ActivityForm({ countryId }) {
                 ))}
               </div>
             </div>
+            {errors.dificulty && (
+              <p className={style.error_input}>{errors.dificulty}</p>
+            )}
             <div className={style.formSection}>
               <label htmlFor="season">Temporada:</label>
               <select
@@ -174,6 +207,13 @@ export default function ActivityForm({ countryId }) {
             >
               Crear Actividad
             </button>
+            {resultForm.message && (
+              <p className={resultForm.resultClass}>{resultForm.message}</p>
+            )}
+            <p className={style.last_p}>
+              Todos los campos sno requeridos, al igual que almenos un país
+              seleccionado
+            </p>
           </form>
         </div>
       )}

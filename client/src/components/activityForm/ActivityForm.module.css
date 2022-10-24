@@ -65,3 +65,42 @@
   border: 1px solid black;
   cursor: pointer;
 }
+
+.last_p{
+  font-size: smaller;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 2em;
+}
+
+.error_input{
+  width: 100%;
+  text-align: center;
+  color: red;
+  background-color: rgba(255, 192, 203, 0.8);
+  border: red 1px solid;
+  margin: 0;
+  padding: 0.5em 0em;
+  border-radius: 1em;
+}
+
+/* Results */
+.result{
+  width: 100%;
+  text-align: center;
+  margin: 0%;
+  margin-top: 1em;
+  padding: 0.5em 0em;
+  border-radius: 1em;
+}
+.result_Success{
+  
+  color: green;
+  background-color: rgba(172, 255, 47, 0.8);
+  border: green 1px solid;
+}
+.result_Fail{
+  color: red;
+  background-color: rgba(255, 192, 203, 0.8);
+  border: red 1px solid;
+}
