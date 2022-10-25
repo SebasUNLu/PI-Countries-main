@@ -18,10 +18,6 @@ const SideMenu = ({
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    updateMenu();
-  }, [menuOpen]);
-
-  const updateMenu = () => {
     if (menuOpen) {
       setMenuClass(`${style.menu} ${style.menu_open}`);
       setBtnClass(`${style.menu_btn_float} ${style.menu_btn_float_menu_open}`);
@@ -29,11 +25,7 @@ const SideMenu = ({
       setMenuClass(`${style.menu} ${style.menu_close}`);
       setBtnClass(`${style.menu_btn_float} ${style.menu_btn_float_menu_close}`);
     }
-  };
-
-  const openMenu = () => {
-    setMenuOpen(true);
-  };
+  }, [menuOpen]);
 
   return (
     <>
@@ -41,7 +33,7 @@ const SideMenu = ({
         {"< Filtros"}
       </button>
 
-      <div className={menuClass} onClick={(e) => console.log(e.target)}>
+      <div className={menuClass}>
         <div className={style.menu_btnClose_div}>
           <button className={style.menu_closeBtn} onClick={()=>setMenuOpen(false)}>{"< Cerrar"}</button>
         </div>

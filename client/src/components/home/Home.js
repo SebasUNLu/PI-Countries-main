@@ -19,11 +19,16 @@ function Home(props) {
   const [orderBy, setOrderBy] = useState("name");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [countryPerPage, setCountryPerPage] = useState(10);
+  const [countryPerPage] = useState(10);
 
   useEffect(() => {
     dispatch(getCountries());
-  }, []);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   console.log('cambiad pagina');
+  //   setCurrentPage(1)
+  // },[activityFilter, continentFilter])
 
   const applyFilter = () => {
     let retList = [...countryList];

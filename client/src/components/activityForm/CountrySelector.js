@@ -16,7 +16,7 @@ const countrySelector = ({ countryList, openList, addCountry, findCountry }) => 
             className={`${style.countryMiniCard} ${findCountry(id) ? `${style.selected}` : ``}`}
             onClick={() => addCountry({ id, name, flag })}
           >
-            <img src={flag} />
+            <img src={flag} alt={`${name}_flag`} />
           </div>
         ))}
     </div>

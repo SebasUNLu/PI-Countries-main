@@ -27,7 +27,7 @@ export default function ActivityForm({ countryId }) {
 
   useEffect(() => {
     dispatch(getCountries());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     checkReady();
@@ -122,7 +122,7 @@ export default function ActivityForm({ countryId }) {
 
   return (
     <>
-      {loadingCountries && <div>Cargando formulario ...</div>}
+      {loadingCountries && <h1 className={style.activity_loading}>Cargando formulario ...</h1>}
       {!loadingCountries && (
         <div className={style.activity_form}>
           <h1>Creación de Actividad</h1>

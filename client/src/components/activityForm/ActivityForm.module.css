@@ -104,3 +104,7 @@
   background-color: rgba(255, 192, 203, 0.8);
   border: red 1px solid;
 }
+
+.activity_loading{
+  margin-top: 20vh;
+}
