@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.menu_btn_float:hover{
+  filter: contrast(0.5)
+}
+
 .menu_btn_float_menu_open{
   opacity: 0;
   visibility: hidden;

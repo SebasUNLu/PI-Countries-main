@@ -1,45 +1,32 @@
 import axios from "axios";
 import style from "./countryDetail.module.css";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDetailCountry } from "../../actions";
 
 export default function CountryDetail({ countryId }) {
+  const { detailLoading, detailError } = useSelector((state) => state);
+  const {
+    name,
+    flag,
+    continent,
+    capital,
+    subregion,
+    area,
+    population,
+    touristActivities,
+  } = useSelector((state) => state.detailCountry);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/countries/${countryId}`)
-      .then((r) => r.data)
-      .then((d) => {
-        setInfo({ ...d });
-        setLoad(true);
-      });
-  }, [countryId]);
-  const [
-    {
-      name,
-      flag,
-      continent,
-      capital,
-      subregion,
-      area,
-      population,
-      touristActivities,
-    },
-    setInfo,
-  ] = useState({
-    name: null,
-    flag: null,
-    continent: null,
-    capital: null,
-    subregion: null,
-    area: null,
-    population: null,
-    touristActivities: null,
-  });
-  const [load, setLoad] = useState(false);
+    dispatch(getDetailCountry(countryId));
+  }, []);
 
   return (
     <div>
-      {!load && <h2>Cargando datos...</h2>}
-      {load && (
+      {detailLoading && <h2>Cargando datos...</h2>}
+      {!detailLoading && name && (
         <div className={style.detailContainer}>
           <h1>{name}</h1>
           <div className={style.flag_Cap_container}>
@@ -66,29 +53,29 @@ export default function CountryDetail({ countryId }) {
           </div>
           <div className={style.activities_Container}>
             <h2>Actividades Turisticas</h2>
-            {
-              touristActivities.length === 0
-              ? <h3>No hay actividades turisticas en este país</h3>
-              : touristActivities.map(({name, dificulty, duration, season}) => 
-                  <div className={style.activity_card}>
-                    <h3>{name}</h3>
-                    <div className={style.activity_details}>
-                      <div className={style.activity_detail_info}>
-                        <h4>Dificultad</h4>
-                        <p>{dificulty}</p>
-                      </div>
-                      <div className={style.activity_detail_info}>
-                        <h4>Duración</h4>
-                        <p>{duration}</p>
-                      </div>
-                      <div className={style.activity_detail_info}>
-                        <h4>Temporada</h4>
-                        <p>{season}</p>
-                      </div>
+            {touristActivities.length === 0 ? (
+              <h3>No hay actividades turisticas en este país</h3>
+            ) : (
+              touristActivities.map(({ name, dificulty, duration, season }) => (
+                <div className={style.activity_card}>
+                  <h3>{name}</h3>
+                  <div className={style.activity_details}>
+                    <div className={style.activity_detail_info}>
+                      <h4>Dificultad</h4>
+                      <p>{dificulty}/5</p>
+                    </div>
+                    <div className={style.activity_detail_info}>
+                      <h4>Duración</h4>
+                      <p>{duration}</p>
+                    </div>
+                    <div className={style.activity_detail_info}>
+                      <h4>Temporada</h4>
+                      <p>{season}</p>
                     </div>
                   </div>
-                )
-            }
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}

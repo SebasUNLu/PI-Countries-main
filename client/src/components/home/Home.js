@@ -25,11 +25,6 @@ function Home(props) {
     dispatch(getCountries());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log('cambiad pagina');
-  //   setCurrentPage(1)
-  // },[activityFilter, continentFilter])
-
   const applyFilter = () => {
     let retList = [...countryList];
     if (continentFilter) {
