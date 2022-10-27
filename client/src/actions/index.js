@@ -5,6 +5,7 @@ export const SET_ERROR_COUNTRIES = "SET_ERROR_COUNTRIES";
 export const GET_DETAIL_COUNTRY = "GET_DETAIL_COUNTRY";
 export const SET_DETAIL_ERROR = "SET_DETAIL_ERROR";
 export const SET_DETAIL_LOADING = "SET_DETAIL_LOADING";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 export const getCountries = (name) => {
   return (dispatch) => {
@@ -54,6 +55,11 @@ export const getDetailCountry = (idCountry) => {
 export const setDetailLoading = (payload) => {
   return { type: SET_DETAIL_LOADING, payload };
 };
+
 export const setDetailError = (payload) => {
   return { type: SET_DETAIL_ERROR, payload };
+};
+
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
 };

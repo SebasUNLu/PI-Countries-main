@@ -5,6 +5,7 @@ import {
   GET_DETAIL_COUNTRY,
   SET_DETAIL_ERROR,
   SET_DETAIL_LOADING,
+  CLEAN_DETAIL,
 } from "../actions";
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
   errorLoadingCountries: false,
   detailCountry: {},
   detailLoading: false,
-  detailError: '',
+  detailError: "",
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -30,6 +31,8 @@ export default function rootReducer(state = initialState, action) {
       return { ...state, detailError: action.payload };
     case SET_DETAIL_LOADING:
       return { ...state, detailLoading: action.payload };
+    case CLEAN_DETAIL:
+      return { ...state, detailCountry: {} };
     default:
       return { ...state };
   }

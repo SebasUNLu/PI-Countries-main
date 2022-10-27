@@ -10,7 +10,7 @@ import SideMenu from "./sideMenu/SideMenu";
 
 function Home(props) {
   const dispatch = useDispatch();
-  const { countryList } = useSelector((state) => state);
+  const { countryList, loadingCountries } = useSelector((state) => state);
 
   const [continentFilter, setContinentFilter] = useState("");
   const [activityFilter, setActivityFilter] = useState("");
@@ -66,24 +66,29 @@ function Home(props) {
   let showCountryList = list.slice(firstIndex, lastIndex);
 
   return (
-    <div className={style.home_container}>
-      <SideMenu
-        setContinentFilter={setContinentFilter}
-        setActivityFilter={setActivityFilter}
-        setAscendent={setAscendent}
-        setOrderBy={setOrderBy}
-      />
-      <div className={style.home_countryList}>
-        <SearchName />
-        <CountryList countryList={showCountryList} />
-        <Pagination
-          totalCountries={list.length}
-          countryPerPage={countryPerPage}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
-    </div>
+    <>
+      {loadingCountries && <h1 className={style.loading}>Cargando...</h1>}
+      {!loadingCountries && (
+        <div className={style.home_container}>
+          <SideMenu
+            setContinentFilter={setContinentFilter}
+            setActivityFilter={setActivityFilter}
+            setAscendent={setAscendent}
+            setOrderBy={setOrderBy}
+          />
+          <div className={style.home_countryList}>
+            <SearchName />
+            <CountryList countryList={showCountryList} />
+            <Pagination
+              totalCountries={list.length}
+              countryPerPage={countryPerPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

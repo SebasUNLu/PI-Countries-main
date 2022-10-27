@@ -25,7 +25,7 @@ export default function CountryDetail({ countryId }) {
 
   return (
     <div>
-      {detailLoading && <h2>Cargando datos...</h2>}
+      {detailLoading && <h2 className={style.loading}>Cargando datos...</h2>}
       {!detailLoading && name && (
         <div className={style.detailContainer}>
           <h1>{name}</h1>
