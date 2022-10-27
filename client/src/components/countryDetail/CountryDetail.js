@@ -1,8 +1,8 @@
 import axios from "axios";
 import style from "./countryDetail.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailCountry } from "../../actions";
+import { cleanDetail, getDetailCountry } from "../../actions";
 
 export default function CountryDetail({ countryId }) {
   const { detailLoading, detailError } = useSelector((state) => state);
@@ -21,6 +21,9 @@ export default function CountryDetail({ countryId }) {
 
   useEffect(() => {
     dispatch(getDetailCountry(countryId));
+    return () => {
+      dispatch(cleanDetail())
+    }
   }, []);
 
   return (

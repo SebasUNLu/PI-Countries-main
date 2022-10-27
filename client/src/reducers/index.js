@@ -12,7 +12,7 @@ const initialState = {
   countryList: [],
   loadingCountries: false,
   errorLoadingCountries: false,
-  detailCountry: {},
+  detailCountry: 0,
   detailLoading: false,
   detailError: "",
 };
@@ -32,7 +32,7 @@ export default function rootReducer(state = initialState, action) {
     case SET_DETAIL_LOADING:
       return { ...state, detailLoading: action.payload };
     case CLEAN_DETAIL:
-      return { ...state, detailCountry: {} };
+      return { ...state, detailCountry: 0};
     default:
       return { ...state };
   }
