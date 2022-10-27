@@ -7,16 +7,17 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
 }) => {
-
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    let paginas = [];
-    for (let i = 1; i <= Math.ceil(totalCountries / countryPerPage); i++) {
-      paginas.push(i);
-    }
+    let paginas = [1];
+    let restCountries = totalCountries - 9; // El 9 es por los primeros 9 en la primera pagina
+    if (restCountries > 0)
+      for (let i = 2; i <= Math.ceil(restCountries / countryPerPage) + 1; i++) {
+        paginas.push(i);
+      }
     setPages(paginas);
-  }, [setPages,totalCountries,countryPerPage]);
+  }, [setPages, totalCountries, countryPerPage]);
 
   useEffect(() => {
     if (currentPage > pages.length && pages.length !== 0)

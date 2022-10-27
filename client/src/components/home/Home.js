@@ -63,32 +63,39 @@ function Home(props) {
   applyOrdering(list);
   let lastIndex = currentPage * countryPerPage;
   let firstIndex = lastIndex - countryPerPage;
+
+  if (currentPage === 1) {
+    firstIndex = 0;
+    lastIndex = 9;
+  } else {
+    firstIndex--;
+    lastIndex--;
+  }
   let showCountryList = list.slice(firstIndex, lastIndex);
 
   return (
-    <>
-      {loadingCountries && <h1 className={style.loading}>Cargando...</h1>}
-      {!loadingCountries && (
-        <div className={style.home_container}>
-          <SideMenu
-            setContinentFilter={setContinentFilter}
-            setActivityFilter={setActivityFilter}
-            setAscendent={setAscendent}
-            setOrderBy={setOrderBy}
-          />
-          <div className={style.home_countryList}>
-            <SearchName />
-            <CountryList countryList={showCountryList} />
-            <Pagination
-              totalCountries={list.length}
-              countryPerPage={countryPerPage}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
-        </div>
-      )}
-    </>
+    <div className={style.home_container}>
+      <SideMenu
+        setContinentFilter={setContinentFilter}
+        setActivityFilter={setActivityFilter}
+        setAscendent={setAscendent}
+        setOrderBy={setOrderBy}
+      />
+      <div className={style.home_countryList}>
+        <SearchName />
+        {loadingCountries && <h1 className={style.loading}>Cargando...</h1>}
+        {!loadingCountries && showCountryList.length === 0 && (
+          <h1 className={style.loading}>No hay paises con ese nombre</h1>
+        )}
+        {!loadingCountries && <CountryList countryList={showCountryList} />}
+        <Pagination
+          totalCountries={list.length}
+          countryPerPage={countryPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
+    </div>
   );
 }
 
