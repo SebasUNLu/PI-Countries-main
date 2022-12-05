@@ -34,6 +34,10 @@ module.exports = (sequelize) => {
         type: ENUM("Verano", "Otoño", "Invierno", "Primavera"),
         allowNull: false,
       },
+      review: {
+        type: STRING,
+        allowNull: false
+      }
     },
     {
       // don't add the timestamp attributes (updatedAt, createdAt)

@@ -14,6 +14,7 @@ export default function ActivityForm({ countryId }) {
     name: "",
     dificulty: "",
     duration: "",
+    review: "",
     season: "Otoño",
   });
   const [countriesSelected, setCountriesSelected] = useState([]);
@@ -53,7 +54,7 @@ export default function ActivityForm({ countryId }) {
     setErrors(validate({ ...input, [name]: value }));
   };
 
-  const validate = ({ name, dificulty, duration, season }) => {
+  const validate = ({ name, dificulty, duration, season, review }) => {
     let errors = {};
     if (!name) errors.name = "El nombre es requerido!";
     else if (!/[\w]+[^\s]$/i) errors.name = "Nombre invalido!";
@@ -62,8 +63,8 @@ export default function ActivityForm({ countryId }) {
     if (!duration) errors.duration = "La duracion es requerida!";
     else if (duration < 1 || duration > 10)
       errors.duration = "La duración debe ser entre 1 y 10 días!";
-    if (!season) errors.name = "La temporada es requerido!";
-
+    if (!season) errors.season = "La temporada es requerido!";
+    if (!review) errors.review = "La review es necesaria";
     return errors;
   };
 
@@ -122,7 +123,9 @@ export default function ActivityForm({ countryId }) {
 
   return (
     <>
-      {loadingCountries && <h1 className={style.activity_loading}>Cargando formulario ...</h1>}
+      {loadingCountries && (
+        <h1 className={style.activity_loading}>Cargando formulario ...</h1>
+      )}
       {!loadingCountries && (
         <div className={style.activity_form}>
           <h1>Creación de Actividad</h1>
@@ -183,6 +186,17 @@ export default function ActivityForm({ countryId }) {
                 <option value={"Verano"}>Verano</option>
               </select>
             </div>
+            <div className={style.formSection}>
+              <label htmlFor="review">Review:</label>
+              <input
+                name="review"
+                onChange={handleInputChange}
+                value={input.review}
+              />
+            </div>
+            {errors.review && (
+              <p className={style.error_input}>{errors.review}</p>
+            )}
             <button
               className={style.openCbtn}
               type="button"

@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   try {
     // duration = integer (days)
     // countries = ['idCountry', 'idCountry', ... ]
-    let { name, dificulty, duration, season, countries } = req.body;
+    let { name, dificulty, duration, season, review, countries } = req.body;
     if (!name || !dificulty || !duration || !season)
       throw new Error("Faltan datos obligatorios");
     if (
@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
       typeof dificulty !== "number" ||
       typeof duration !== "number" ||
       typeof season !== "string" ||
+      typeof review !== "string" ||
       !Array.isArray(countries)
     )
       throw new Error("Formato de datos enviados invalido");
@@ -31,6 +32,7 @@ router.post("/", async (req, res) => {
       dificulty,
       duration,
       season,
+      review,
     });
     await newActivity.addCountries(countries);
     res.status(201).send("Se ha creado con exito");
